@@ -41,9 +41,9 @@ export default function LoginPage() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
         <div className="login-logo">
-          <img src="/uad_logo_symbol.png" alt="Universitas Ahmad Dahlan" />
+          <img src="/saka.png" alt="Universitas Ahmad Dahlan" />
           <h1>E-Teaching School UAD</h1>
-          <p>Sistem Pengenalan Praktik Lapangan</p>
+          <p>Sistem Informasi Teaching School</p>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Universitas Ahmad Dahlan</p>
         </div>
 
