@@ -13,9 +13,11 @@ export default function StudentSettings() {
   const [password, setPassword] = useState('');
   const [companyId, setCompanyId] = useState('');
   const [dplId, setDplId] = useState('');
+  const [guruPamongId, setGuruPamongId] = useState('');
   const [pembimbingIndustri, setPembimbingIndustri] = useState('');
   const [companies, setCompanies] = useState([]);
   const [dosens, setDosens] = useState([]);
+  const [guruPamongs, setGuruPamongs] = useState([]);
   const [saving, setSaving] = useState(false);
   const [loadingOpts, setLoadingOpts] = useState(true);
 
@@ -25,6 +27,7 @@ export default function StudentSettings() {
       setUsername(user.username || '');
       setCompanyId(user.mitra?.id || user.company_id || '');
       setDplId(user.dosen_pembimbing?.id || user.dpl_id || '');
+      setGuruPamongId(user.guru_pamong?.id || user.guru_pamong_id || '');
       setPembimbingIndustri(user.pembimbing_industri || '');
     }
   }, [user]);
@@ -32,12 +35,14 @@ export default function StudentSettings() {
   useEffect(() => {
     const loadOpts = async () => {
       try {
-        const [cRes, dRes] = await Promise.all([
+        const [cRes, dRes, gpRes] = await Promise.all([
           api.get('/options/companies'),
-          api.get('/options/dosens')
+          api.get('/options/dosens'),
+          api.get('/options/guru-pamongs')
         ]);
         setCompanies(cRes.data.data || []);
         setDosens(dRes.data.data || []);
+        setGuruPamongs(gpRes.data.data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -55,6 +60,7 @@ export default function StudentSettings() {
       if (password) data.password = password;
       if (companyId) data.company_id = companyId;
       if (dplId) data.dpl_id = dplId;
+      if (guruPamongId) data.guru_pamong_id = guruPamongId;
       if (pembimbingIndustri) data.pembimbing_industri = pembimbingIndustri;
 
       await api.post('/auth/update-profile', data);
@@ -72,6 +78,10 @@ export default function StudentSettings() {
     await logout();
     navigate('/login');
   };
+
+  const filteredGuruPamongs = companyId
+    ? guruPamongs.filter(gp => gp.company_id == companyId)
+    : guruPamongs;
 
   return (
     <div className="student-page fade-in">
@@ -124,7 +134,14 @@ export default function StudentSettings() {
             </select>
           </div>
           <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label className="student-label" style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>Pamong / Pembimbing Lapangan Instansi</label>
+            <label className="student-label" style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>Guru Pamong</label>
+            <select className="student-select full" value={guruPamongId} onChange={e => setGuruPamongId(e.target.value)} style={{ padding: '10px 14px', border: '1px solid #cbd5e1', borderRadius: '8px', fontSize: '14px', outline: 'none', background: '#fff' }}>
+              <option value="">-- Pilih Guru Pamong --</option>
+              {filteredGuruPamongs.map(gp => <option key={gp.id} value={gp.id}>{gp.name}</option>)}
+            </select>
+          </div>
+          <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <label className="student-label" style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>Pamong / Pembimbing Lapangan Instansi (Custom Text)</label>
             <input className="student-input" value={pembimbingIndustri} onChange={e => setPembimbingIndustri(e.target.value)} style={{ padding: '10px 14px', border: '1px solid #cbd5e1', borderRadius: '8px', fontSize: '14px', outline: 'none' }} />
           </div>
 
