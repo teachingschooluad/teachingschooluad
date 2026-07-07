@@ -74,7 +74,7 @@ export default function GradeRecapPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-        <h1 className="page-title">📊 Rekap Nilai Mahasiswa PPL</h1>
+        <h1 className="page-title">📊 Penilaian Mahasiswa PPL</h1>
         <button className="btn btn-primary" onClick={handleExport} disabled={!recapData || !recapData.recap || recapData.recap.length === 0}>
           <HiOutlineDownload /> Ekspor CSV
         </button>
@@ -181,21 +181,27 @@ export default function GradeRecapPage() {
                           {(isAdmin || isDpl) && (
                             <button
                               className="btn btn-sm btn-secondary"
-                              onClick={() => navigate(`/admin/instruments/${row.components.final_assessment.dpl_instrument_id}/fill/${row.student.id}`)}
+                              onClick={() => {
+                                const prefix = isDpl ? '/dpl' : '/admin';
+                                navigate(`${prefix}/instruments/${row.components.final_assessment.dpl_instrument_id}/fill/${row.student.id}`);
+                              }}
                               disabled={!row.components.final_assessment.dpl_instrument_id}
                               title={row.components.final_assessment.dpl_instrument_id ? "Isi Instrumen DPL" : "Instrumen DPL belum aktif"}
                             >
-                              📝 DPL
+                              📝 Penilaian Akhir
                             </button>
                           )}
                           {(isAdmin || isGuruPamong) && (
                             <button
                               className="btn btn-sm btn-secondary"
-                              onClick={() => navigate(`/admin/instruments/${row.components.final_assessment.gp_instrument_id}/fill/${row.student.id}`)}
+                              onClick={() => {
+                                const prefix = isGuruPamong ? '/guru-pamong' : '/admin';
+                                navigate(`${prefix}/instruments/${row.components.final_assessment.gp_instrument_id}/fill/${row.student.id}`);
+                              }}
                               disabled={!row.components.final_assessment.gp_instrument_id}
                               title={row.components.final_assessment.gp_instrument_id ? "Isi Instrumen Guru Pamong" : "Instrumen Guru Pamong belum aktif"}
                             >
-                              📝 Pamong
+                              📝 Penilaian Akhir
                             </button>
                           )}
                         </div>

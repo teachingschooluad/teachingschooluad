@@ -64,8 +64,10 @@ const navConfig = {
       { to: '/dpl/permissions', iconName: 'event_busy', label: 'Perijinan' },
     ]},
     { section: 'Penilaian', items: [
-      { to: '/dpl/instruments', iconName: 'fact_check', label: 'Instrumen Penilaian' },
-      { to: '/dpl/grades', iconName: 'analytics', label: 'Rekap Nilai' },
+      { to: '/dpl/grades', iconName: 'analytics', label: 'Penilaian' },
+    ]},
+    { section: 'Lainnya', items: [
+      { to: '/dpl/settings', iconName: 'settings', label: 'Pengaturan' },
     ]},
   ],
   dps: [
@@ -76,6 +78,9 @@ const navConfig = {
       { to: '/dps/attendance', iconName: 'calendar_today', label: 'Presensi' },
       { to: '/dps/logbook-monitoring', iconName: 'fact_check', label: 'Monitoring Logbook' },
       { to: '/dps/students', iconName: 'group', label: 'Mahasiswa Bimbingan' },
+    ]},
+    { section: 'Lainnya', items: [
+      { to: '/dps/settings', iconName: 'settings', label: 'Pengaturan' },
     ]},
   ],
   sekolah: [
@@ -94,8 +99,10 @@ const navConfig = {
       { to: '/guru-pamong/students', iconName: 'group', label: 'Mahasiswa Bimbingan' },
     ]},
     { section: 'Penilaian', items: [
-      { to: '/guru-pamong/instruments', iconName: 'fact_check', label: 'Instrumen Penilaian' },
-      { to: '/guru-pamong/grades', iconName: 'analytics', label: 'Rekap Nilai' },
+      { to: '/guru-pamong/grades', iconName: 'analytics', label: 'Penilaian' },
+    ]},
+    { section: 'Lainnya', items: [
+      { to: '/guru-pamong/settings', iconName: 'settings', label: 'Pengaturan' },
     ]},
   ],
   ortu: [
@@ -110,6 +117,7 @@ const roleDisplayNames = {
   admin: 'Administrator',
   dkl: 'Dosen Koordinator',
   dpl: 'Dosen Pembimbing',
+  dps: 'Dosen Pamong Skripsi',
   mahasiswa: 'Mahasiswa',
   sekolah: 'Instansi Mitra',
   guru_pamong: 'Guru Pamong',

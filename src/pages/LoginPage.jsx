@@ -8,6 +8,7 @@ const roleRoutes = {
   admin: '/admin/dashboard',
   dkl: '/dkl/dashboard',
   dpl: '/dpl/dashboard',
+  dps: '/dps/dashboard',
   mahasiswa: '/mahasiswa/dashboard',
   sekolah: '/sekolah/dashboard',
   guru_pamong: '/guru-pamong/dashboard',

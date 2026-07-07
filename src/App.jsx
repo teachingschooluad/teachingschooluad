@@ -37,6 +37,7 @@ import PermissionsPage from './pages/admin/PermissionsPage';
 import ParentTrackingPage from './pages/public/ParentTrackingPage';
 import PrivacyPolicy from './pages/public/PrivacyPolicy';
 import RoleDashboard from './pages/admin/RoleDashboard';
+import RoleSettingsPage from './pages/admin/RoleSettingsPage';
 
 function ProtectedRoute({ children, roles }) {
   const { user, token } = useAuthStore();
@@ -97,9 +98,9 @@ export default function App() {
           <Route path="logbook-monitoring" element={<LogbookMonitoringPage />} />
           <Route path="students" element={<StudentsPage />} />
           <Route path="permissions" element={<PermissionsPage />} />
-          <Route path="instruments" element={<InstrumentManagePage />} />
           <Route path="instruments/:instrumentId/fill/:studentId" element={<InstrumentFillPage />} />
           <Route path="grades" element={<GradeRecapPage />} />
+          <Route path="settings" element={<RoleSettingsPage />} />
         </Route>
 
         {/* Dosen Pamong Skripsi (DPS) */}
@@ -108,6 +109,7 @@ export default function App() {
           <Route path="attendance" element={<AttendanceGrid />} />
           <Route path="logbook-monitoring" element={<LogbookMonitoringPage />} />
           <Route path="students" element={<StudentsPage />} />
+          <Route path="settings" element={<RoleSettingsPage />} />
         </Route>
 
         {/* Instansi Mitra (Sekolah/Company) */}
@@ -122,9 +124,9 @@ export default function App() {
           <Route path="dashboard" element={<RoleDashboard />} />
           <Route path="attendance" element={<AttendanceGrid />} />
           <Route path="students" element={<StudentsPage />} />
-          <Route path="instruments" element={<InstrumentManagePage />} />
           <Route path="instruments/:instrumentId/fill/:studentId" element={<InstrumentFillPage />} />
           <Route path="grades" element={<GradeRecapPage />} />
+          <Route path="settings" element={<RoleSettingsPage />} />
         </Route>
 
         {/* Student (PWA — Mobile-First with Bottom Nav) */}
