@@ -23,6 +23,13 @@ export default function CompaniesPage() {
     coord_1: '', coord_2: '', coord_3: '', coord_4: '' 
   });
 
+  // Password states
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordUserId, setPasswordUserId] = useState(null);
+  const [passwordUserName, setPasswordUserName] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [updatingPassword, setUpdatingPassword] = useState(false);
+
   useEffect(() => {
     fetchCompanies();
   }, [page, search]);
@@ -154,6 +161,31 @@ export default function CompaniesPage() {
     }
   };
 
+  const openPasswordModal = (company) => {
+    setPasswordUserId(company.industry_user_id);
+    setPasswordUserName(company.name);
+    setNewPassword('');
+    setShowPasswordModal(true);
+  };
+
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    if (!newPassword || newPassword.length < 6) {
+      alert('Password harus minimal 6 karakter');
+      return;
+    }
+    setUpdatingPassword(true);
+    try {
+      await api.put(`/master/users/${passwordUserId}/password`, { password: newPassword });
+      alert('Password berhasil diperbarui!');
+      setShowPasswordModal(false);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Gagal mengubah password');
+    } finally {
+      setUpdatingPassword(false);
+    }
+  };
+
   return (
     <div>
       <div className="main-header" style={{ position: 'relative', padding: 0, marginBottom: '24px', background: 'transparent', border: 'none' }}>
@@ -214,6 +246,9 @@ export default function CompaniesPage() {
                         )}
                       </td>
                       <td style={{ padding: '16px', textAlign: 'center' }}>
+                        {company.industry_user_id && (
+                          <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px', marginRight: '8px' }} onClick={() => openPasswordModal(company)}>Password</button>
+                        )}
                         <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px', marginRight: '8px' }} onClick={() => openEditForm(company)}>Edit</button>
                         <button className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '12px', color: 'var(--danger)', borderColor: 'var(--danger)' }} onClick={() => handleDelete(company.id)}>Hapus</button>
                       </td>
@@ -330,6 +365,38 @@ export default function CompaniesPage() {
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
                 <button type="button" className="btn btn-outline" onClick={() => setShowFormModal(false)}>Batal</button>
                 <button type="submit" className="btn btn-primary">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Password Reset Modal */}
+      {showPasswordModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div className="card" style={{ width: '400px', padding: '24px' }}>
+            <h3 style={{ marginBottom: '16px' }}>Ubah Password</h3>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '16px', fontSize: '14px' }}>
+              Mengubah password untuk akun mitra <strong>{passwordUserName}</strong>.
+            </p>
+            <form onSubmit={handleUpdatePassword}>
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ display: 'block', marginBottom: '8px' }}>Password Baru</label>
+                <input 
+                  type="password" 
+                  className="form-input" 
+                  value={newPassword} 
+                  onChange={(e) => setNewPassword(e.target.value)} 
+                  placeholder="Minimal 6 karakter"
+                  required 
+                  minLength={6}
+                />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
+                <button type="button" className="btn btn-outline" onClick={() => setShowPasswordModal(false)}>Batal</button>
+                <button type="submit" className="btn btn-primary" disabled={updatingPassword}>
+                  {updatingPassword ? 'Menyimpan...' : 'Simpan'}
+                </button>
               </div>
             </form>
           </div>
