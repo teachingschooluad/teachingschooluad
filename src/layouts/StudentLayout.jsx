@@ -19,7 +19,6 @@ const navItems = [
   { to: '/mahasiswa/dashboard', icon: HiOutlineHome, label: 'Dashboard' },
   { to: '/mahasiswa/attendance', icon: HiOutlineFingerPrint, label: 'Presensi' },
   { to: '/mahasiswa/logbooks', icon: HiOutlineDocumentText, label: 'Logbook' },
-  { to: '/mahasiswa/assessments', icon: HiOutlineClipboardCheck, label: 'Asesmen' },
   { to: '/mahasiswa/grades', icon: HiOutlineChartBar, label: 'Nilai' },
 ];
 

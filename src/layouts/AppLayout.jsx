@@ -12,7 +12,7 @@ const navConfig = {
       { to: '/admin/attendance', iconName: 'calendar_today', label: 'Presensi' },
       { to: '/admin/logbook-assignments', iconName: 'assignment', label: 'Penugasan Logbook' },
       { to: '/admin/logbook-monitoring', iconName: 'fact_check', label: 'Monitoring Logbook' },
-      { to: '/admin/permissions', iconName: 'event_busy', label: 'Perijinan' },
+      { to: '/admin/permissions', iconName: 'event_busy', label: 'Perizinan' },
     ]},
     { section: 'Data Master', items: [
       { to: '/admin/students', iconName: 'group', label: 'Mahasiswa' },
@@ -44,7 +44,7 @@ const navConfig = {
       { to: '/dkl/attendance', iconName: 'calendar_today', label: 'Presensi' },
       { to: '/dkl/students', iconName: 'group', label: 'Mahasiswa' },
       { to: '/dkl/guru-pamongs', iconName: 'badge', label: 'Guru Pamong' },
-      { to: '/dkl/permissions', iconName: 'event_busy', label: 'Perijinan' },
+      { to: '/dkl/permissions', iconName: 'event_busy', label: 'Perizinan' },
     ]},
     { section: 'Penilaian', items: [
       { to: '/dkl/grades', iconName: 'analytics', label: 'Rekap Nilai' },
@@ -61,7 +61,7 @@ const navConfig = {
       { to: '/dpl/attendance', iconName: 'calendar_today', label: 'Presensi' },
       { to: '/dpl/logbook-monitoring', iconName: 'fact_check', label: 'Monitoring Logbook' },
       { to: '/dpl/students', iconName: 'group', label: 'Mahasiswa Bimbingan' },
-      { to: '/dpl/permissions', iconName: 'event_busy', label: 'Perijinan' },
+      { to: '/dpl/permissions', iconName: 'event_busy', label: 'Perizinan' },
     ]},
     { section: 'Penilaian', items: [
       { to: '/dpl/grades', iconName: 'analytics', label: 'Penilaian' },

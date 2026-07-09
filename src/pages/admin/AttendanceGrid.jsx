@@ -585,7 +585,7 @@ export default function AttendanceGrid() {
                         Mahasiswa ini sedang {selectedDetail.dayData.status === 'S' ? 'Sakit' : 'Izin'}
                       </h4>
                       <p className="text-on-surface-variant text-body-sm leading-relaxed">
-                        Data surat izin dan bukti persetujuan ketidakhadiran dapat dikelola di halaman Perijinan.
+                        Data surat izin dan bukti persetujuan ketidakhadiran dapat dikelola di halaman Perizinan.
                       </p>
                     </div>
                   )}

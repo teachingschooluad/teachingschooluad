@@ -63,17 +63,17 @@ export default function PermissionsPage() {
     
     try {
       await api.post('/permissions', formData);
-      alert('Ijin berhasil dicatat!');
+      alert('Izin berhasil dicatat!');
       setShowForm(false);
       setFormData({ ...formData, keterangan: '' });
       fetchPermissions();
     } catch (err) {
-      alert(err.response?.data?.message || 'Gagal menyimpan ijin');
+      alert(err.response?.data?.message || 'Gagal menyimpan izin');
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Hapus data perijinan ini?")) return;
+    if (!window.confirm("Hapus data perizinan ini?")) return;
     try {
       await api.delete(`/permissions/${id}`);
       fetchPermissions();
@@ -85,16 +85,16 @@ export default function PermissionsPage() {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <h1 className="page-title">Data Perijinan PPL</h1>
+        <h1 className="page-title">Data Perizinan PPL</h1>
         <button className="btn btn-primary" onClick={() => setShowForm(!showForm)}>
-          {showForm ? 'Batal' : '+ Input Ijin'}
+          {showForm ? 'Batal' : '+ Input Izin'}
         </button>
       </div>
 
       {showForm && (
         <div className="card" style={{ marginBottom: '24px' }}>
           <div className="card-header">
-            <h3>Form Input Perijinan (Sakit/Izin)</h3>
+            <h3>Form Input Perizinan (Sakit/Izin)</h3>
           </div>
           <div className="card-body">
             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
@@ -114,7 +114,7 @@ export default function PermissionsPage() {
               </div>
 
               <div>
-                <label>Jenis Perijinan</label>
+                <label>Jenis Perizinan</label>
                 <select className="form-control" value={formData.type} onChange={e => setFormData({...formData, type: e.target.value})} required>
                   <option value="sakit">Sakit</option>
                   <option value="ijin">Izin</option>
@@ -127,7 +127,7 @@ export default function PermissionsPage() {
               </div>
 
               <div style={{ gridColumn: '1 / -1' }}>
-                <button type="submit" className="btn btn-primary">Simpan Ijin</button>
+                <button type="submit" className="btn btn-primary">Simpan Izin</button>
               </div>
             </form>
           </div>
@@ -153,8 +153,8 @@ export default function PermissionsPage() {
         ) : permissions.length === 0 ? (
           <div className="card-body empty-state">
             <div className="icon">✓</div>
-            <h3>Tidak ada data perijinan</h3>
-            <p>Mahasiswa tidak ada yang ijin/sakit di bulan ini.</p>
+            <h3>Tidak ada data perizinan</h3>
+            <p>Mahasiswa tidak ada yang izin/sakit di bulan ini.</p>
           </div>
         ) : (
           <div className="table-responsive">
